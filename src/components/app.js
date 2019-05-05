@@ -16,6 +16,7 @@ class App extends React.Component {
     this.searchList = this.searchList.bind(this);
     this.addMovie= this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
+    this.filterWatched = this.filterWatched.bind(this);
   }
 
   searchList(input) {
@@ -40,7 +41,7 @@ class App extends React.Component {
 
   addMovie(input) {
     this.setState({
-      movies: this.state.movies.concat({title: input})  
+      movies: this.state.movies.concat({title: input})
     });
   }
 
@@ -55,6 +56,24 @@ class App extends React.Component {
     });
   }
 
+  filterWatched(event) {
+    let matchedMovies = [];
+    if (event.target.id === 'watched') {
+      //  change matches to watched movies
+      this.state.movies.forEach(movie => {
+        movie.watched ? matchedMovies.push(movie) : null;
+      });
+    } else if (event.target.id === 'toWatch') {
+      //  change matches to unwatched movies
+      this.state.movies.forEach(movie => {
+        movie.watched ? null : matchedMovies.push(movie);
+      });
+    }
+    this.setState({
+      matches: matchedMovies
+    });
+  }
+
   render() {
     return(
       <div>
@@ -62,8 +81,9 @@ class App extends React.Component {
         <SearchBar search={this.searchList} />
         <AddMovie addMovie={this.addMovie} />
         <h2 id="noResults" hidden={true}>Sorry, no results were found</h2>
-        <button className="showWatched">Watched</button>
-        <button className="showToWatch">To Watch</button>
+        <button id="watched" onClick={this.filterWatched}>Watched</button>
+        <button id="toWatch" onClick={this.filterWatched}>To Watch</button>
+        <button id="showAll" onClick={this.filterWatched}>Show All</button>
         <MovieList toggleWatched={this.toggleWatched} movies={this.state.movies.filter((movie) => {
           return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
         })} />
