@@ -10,11 +10,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       movies: movies,
-      matches: [],
-      userMovies: []
+      matches: []
     }
+
     this.searchList = this.searchList.bind(this);
     this.addMovie= this.addMovie.bind(this);
+    this.toggleWatched = this.toggleWatched.bind(this);
   }
 
   searchList(input) {
@@ -39,7 +40,18 @@ class App extends React.Component {
 
   addMovie(input) {
     this.setState({
-      userMovies: this.state.userMovies.concat({title: input})  
+      movies: this.state.movies.concat({title: input})  
+    });
+  }
+
+  toggleWatched(movieTitle) {
+    let movieList = [];
+    this.state.movies.forEach(movie => {
+      movie.title.toLowerCase() === movieTitle.toLowerCase() ? movie.watched = !movie.watched : null;
+      movieList.push(movie);
+    });
+    this.setState({
+      movies: movieList
     });
   }
 
@@ -49,11 +61,10 @@ class App extends React.Component {
         <h1 className="movieListHeader">Movie List</h1>
         <SearchBar search={this.searchList} />
         <AddMovie addMovie={this.addMovie} />
-        <h2>My Movies</h2>
-        <MovieList movies={this.state.userMovies} />
-        <h2>All Movies</h2>
         <h2 id="noResults" hidden={true}>Sorry, no results were found</h2>
-        <MovieList movies={this.state.movies.filter((movie) => {
+        <button className="showWatched">Watched</button>
+        <button className="showToWatch">To Watch</button>
+        <MovieList toggleWatched={this.toggleWatched} movies={this.state.movies.filter((movie) => {
           return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
         })} />
         

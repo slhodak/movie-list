@@ -1,9 +1,16 @@
 let movies = [
-  {title: 'The Matrix'},
-  {title: 'The Shining'},
-  {title: 'The Big Lebowski'},
-  {title: 'The Tale Of Buster Scruggs'},
-  {title: 'The Day the Earth Stood Still'}
+  {
+    title: 'The Matrix',
+    watched: false
+  },
+  {
+    title: 'The Shining',
+    watched: false
+  },
+  {
+    title: 'The Day the Earth Stood Still',
+    watched: true
+  }
 ]
 
 export default movies;

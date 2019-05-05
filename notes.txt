@@ -1,0 +1,15 @@
+'watched' should be a property of the movie object in the main list
+  - not a property of the movie list entry state
+
+movies listed as entries display watched status based on their watched property
+  from whole list entry property
+  set at instantiation
+    button
+      different color
+      different text
+  reset ?
+
+
+handle color changes with classes attached/detached from button or div
+
+added movies must have watched property
