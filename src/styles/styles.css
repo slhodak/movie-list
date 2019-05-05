@@ -6,8 +6,23 @@ body {
   margin: 0px;
 }
 
+.movieListHeader {
+  background-color: lightgray;
+  margin: 0px;
+  padding: 20px;
+}
+
+#main {
+  margin-left: 10%;
+}
+
 .basic {
   background-color: lightblue;
+}
+
+ul {
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 .movieListEntry {
@@ -18,7 +33,6 @@ body {
 }
 
 .movieListEntry {
-  margin-left: 10%;
   display: grid;
   grid-template: repeat(5, 10px) / repeat(5, 1fr);
 }
@@ -44,12 +58,14 @@ body {
   background-color: rgb(209, 207, 207);
 }
 
-.movieListHeader {
-  background-color: lightgray;
-  margin: 0px;
-  padding: 20px;
+.searchBar, .addMovie {
+  margin: 10px 0px 10px 10px;
 }
 
-.searchBar, .addMovie {
-  padding: 10px;
+.filterButtons button{
+  height: 60px;
+  width: 100px;
+  background-color: #fafffe;
+  font-size: 1em;
+  margin: 0px 0px 0px 10px;
 }

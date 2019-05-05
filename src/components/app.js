@@ -78,16 +78,19 @@ class App extends React.Component {
     return(
       <div>
         <h1 className="movieListHeader">Movie List</h1>
-        <SearchBar search={this.searchList} />
-        <AddMovie addMovie={this.addMovie} />
-        <h2 id="noResults" hidden={true}>Sorry, no results were found</h2>
-        <button id="watched" onClick={this.filterWatched}>Watched</button>
-        <button id="toWatch" onClick={this.filterWatched}>To Watch</button>
-        <button id="showAll" onClick={this.filterWatched}>Show All</button>
-        <MovieList toggleWatched={this.toggleWatched} movies={this.state.movies.filter((movie) => {
-          return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
-        })} />
-        
+        <div id="main">
+          <SearchBar search={this.searchList} />
+          <AddMovie addMovie={this.addMovie} />
+          <h2 id="noResults" hidden={true}>Sorry, no results were found</h2>
+          <div className="filterButtons">
+            <button id="watched" onClick={this.filterWatched}>Watched</button>
+            <button id="toWatch" onClick={this.filterWatched}>To Watch</button>
+            <button id="showAll" onClick={this.filterWatched}>Show All</button>
+          </div>
+          <MovieList toggleWatched={this.toggleWatched} movies={this.state.movies.filter((movie) => {
+            return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
+          })} />
+        </div>
       </div>
     )
   }
