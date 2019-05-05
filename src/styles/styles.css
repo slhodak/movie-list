@@ -27,6 +27,6 @@ body {
   padding: 20px;
 }
 
-.searchBar {
+.searchBar, .addMovie {
   padding: 10px;
 }

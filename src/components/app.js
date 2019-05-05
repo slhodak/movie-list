@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './movieList';
 import SearchBar from './search';
+import AddMovie from './addMovie';
 import movies from '../data/movieData';
 import _ from 'lodash';
 
@@ -9,9 +10,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       movies: movies,
-      matches: []
+      matches: [],
+      userMovies: []
     }
     this.searchList = this.searchList.bind(this);
+    this.addMovie= this.addMovie.bind(this);
   }
 
   searchList(input) {
@@ -34,15 +37,26 @@ class App extends React.Component {
     });
   }
 
+  addMovie(input) {
+    this.setState({
+      userMovies: this.state.userMovies.concat({title: input})  
+    });
+  }
+
   render() {
     return(
       <div>
         <h1 className="movieListHeader">Movie List</h1>
         <SearchBar search={this.searchList} />
+        <AddMovie addMovie={this.addMovie} />
+        <h2>My Movies</h2>
+        <MovieList movies={this.state.userMovies} />
+        <h2>All Movies</h2>
         <h2 id="noResults" hidden={true}>Sorry, no results were found</h2>
         <MovieList movies={this.state.movies.filter((movie) => {
           return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
         })} />
+        
       </div>
     )
   }
