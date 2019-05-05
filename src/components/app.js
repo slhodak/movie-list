@@ -17,6 +17,11 @@ class App extends React.Component {
     this.addMovie= this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
     this.filterWatched = this.filterWatched.bind(this);
+
+  }
+
+  componentDidMount() {
+    this.filterWatched({target: {id: 'showAll'}});
   }
 
   searchList(input) {
@@ -68,6 +73,8 @@ class App extends React.Component {
       this.state.movies.forEach(movie => {
         movie.watched ? null : matchedMovies.push(movie);
       });
+    } else {
+      matchedMovies = this.state.movies;
     }
     this.setState({
       matches: matchedMovies
@@ -88,7 +95,7 @@ class App extends React.Component {
             <button id="showAll" onClick={this.filterWatched}>Show All</button>
           </div>
           <MovieList toggleWatched={this.toggleWatched} movies={this.state.movies.filter((movie) => {
-            return this.state.matches.length === 0 || _.includes(this.state.matches, movie);
+            return _.includes(this.state.matches, movie);
           })} />
         </div>
       </div>
