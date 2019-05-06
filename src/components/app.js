@@ -17,7 +17,6 @@ class App extends React.Component {
     this.addMovie= this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
     this.filterWatched = this.filterWatched.bind(this);
-
   }
 
   componentDidMount() {
@@ -49,7 +48,7 @@ class App extends React.Component {
       movies: this.state.movies.concat({title: input})
     });
   }
-
+  
   toggleWatched(movieTitle) {
     let movieList = [];
     this.state.movies.forEach(movie => {

@@ -1,15 +1,18 @@
 let movies = [
   {
     title: 'The Matrix',
-    watched: false
+    watched: false,
+    description: 'You take the blue pill or the red pill'
   },
   {
     title: 'The Shining',
-    watched: false
+    watched: false,
+    description: 'Forever and ever'
   },
   {
     title: 'The Day the Earth Stood Still',
-    watched: true
+    watched: true,
+    description: 'The whole world was watching'
   }
 ]
 
