@@ -29,11 +29,12 @@ class MovieListEntry extends React.Component {
           <p>{this.props.movie.title}</p>
         </div>
         <div className="dataPanel" hidden={this.state.dataPanelHidden}>
-        <button 
+          <button 
             className={this.props.movie.watched ? "watched" : "toWatch"} 
             onClick={this.handleWatchClick}>
               {this.props.movie.watched ? "Watched" : "To Watch"}
           </button>
+          <p>{this.props.movie.description}</p>  
         </div>
       </div>
     )

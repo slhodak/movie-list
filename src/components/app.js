@@ -48,7 +48,7 @@ class App extends React.Component {
       movies: this.state.movies.concat({title: input})
     });
   }
-  
+
   toggleWatched(movieTitle) {
     let movieList = [];
     this.state.movies.forEach(movie => {
@@ -63,12 +63,10 @@ class App extends React.Component {
   filterWatched(event) {
     let matchedMovies = [];
     if (event.target.id === 'watched') {
-      //  change matches to watched movies
       this.state.movies.forEach(movie => {
         movie.watched ? matchedMovies.push(movie) : null;
       });
     } else if (event.target.id === 'toWatch') {
-      //  change matches to unwatched movies
       this.state.movies.forEach(movie => {
         movie.watched ? null : matchedMovies.push(movie);
       });
