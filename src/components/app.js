@@ -3,14 +3,16 @@ import MovieList from './movieList';
 import SearchBar from './search';
 import AddMovie from './addMovie';
 import movies from '../data/movieData';
+import searchDB from '../actions/searchMovies';
 import _ from 'lodash';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: movies,
-      matches: []
+      movies: [],
+      matches: [],
+      firstLoad: true
     }
 
     this.searchList = this.searchList.bind(this);
@@ -21,7 +23,21 @@ class App extends React.Component {
 
   componentDidMount() {
     this.filterWatched({target: {id: 'showAll'}});
+    this.state.firstLoad ? this.loadMovieData() : null;
   }
+
+  loadMovieData() {
+    //  add real movie descriptions when page is loaded
+    movies.forEach(movie => {
+      searchDB(movie.title, (data) => {
+        movie.description = data[0].overview;
+      });
+    });
+    this.setState({
+      movies: movies,
+      firstLoad: false
+    });
+   } 
 
   searchList(input) {
     let matches = [];
@@ -39,13 +55,21 @@ class App extends React.Component {
       noResultsElement.hidden = true;
     }
     this.setState({
-      matches: matches
+      matches: matches,
+      firstLoad: false
     });
   }
 
-  addMovie(input) {
-    this.setState({
-      movies: this.state.movies.concat({title: input})
+  addMovie(title) {
+    searchDB(title, data => {
+      let movie = {
+        title: title,
+        description: data[0].overview,
+        watched: false
+      }
+      this.setState({
+        movies: this.state.movies.concat(movie)
+      });
     });
   }
 
